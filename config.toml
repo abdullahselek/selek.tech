@@ -5,7 +5,7 @@ title = "Apo's tech blog"
 author = "Abdullah Selek"
 copyright = "Abdullah Selek - [MIT License](https://github.com/abdullahselek/selek.tech/blob/main/LICENSE)."
 
-paginate = 5
+pagination.pagerSize = 5
 summaryLength = 30
 
 [params]
