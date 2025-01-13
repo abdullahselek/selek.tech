@@ -1,6 +1,6 @@
 baseURL = "https://selek.tech/"
 theme = "hugo-ficurinia"
-title = "Apo's tech blog"
+title = "AI, ML and Data Science"
 
 author = "Abdullah Selek"
 copyright = "Abdullah Selek - [MIT License](https://github.com/abdullahselek/selek.tech/blob/main/LICENSE)."
