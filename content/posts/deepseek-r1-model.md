@@ -5,7 +5,7 @@ tags:
   - deepseek
   - r1 model
   - mixture of experts
-  - reaning model
+  - reasoning model
 image:
 comments: true
 ---
