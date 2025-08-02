@@ -20,7 +20,7 @@ A DAG is both **Directed** and **Acyclic** meaning each edge has a direction, re
 
 ## How a DAG Operates?
 
-A DAG operates by organizing tasks or operations as nodes connected by directed edges that define dependencies, ensuring a clear execution order. Tasks without dependencies are executed first, followed by dependent tasks as their prerequisites are completed. This structure allows for topological sorting, which determines the proper sequence of execution while preventing cycles that could cause infinite loops. Independent tasks can run in parallel, enhancing efficiency, while edges facilitate the flow of data or results between tasks. In case of failure, only the affected task and its dependents are paused or retried, ensuring targeted error handling without disrupting unrelated parts of the workflow. This modular and dependency-driven approach makes DAGs ideal for managing complex processes like machine learning pipelines or data workflows.
+A DAG operates by organizing tasks or operations as nodes connected by directed edges that define dependencies, ensuring a clear execution order. Tasks without dependencies are executed first, followed by dependent tasks as their prerequisites are completed. This structure allows for topological sorting, which determines the proper sequence of execution while preventing cycles that could cause infinite loops. Independent tasks can run in parallel, enhancing efficiency, while edges facilitate the flow of data or results between tasks. In case of failure, only the affected task and its dependents are paused or retried, ensuring targeted error handling without disrupting unrelated parts of the workflow. This modular and dependency driven approach makes DAGs ideal for managing complex processes like machine learning pipelines or data workflows.
 
 ![topological-sort-order](/images/post_pics/dag-directed-acyclic-graph/dag-topological-sort-order.jpg)
 
@@ -36,7 +36,7 @@ In frameworks like PyTorch and TensorFlow, DAGs represent models as a series of 
 
 3. Causal Inference
 
-DAGs are used to model cause-and-effect relationships within a system. Nodes represent variables, while edges signify causal dependencies, helping researchers analyze interventions and their outcomes.
+DAGs are used to model cause and effect relationships within a system. Nodes represent variables, while edges signify causal dependencies, helping researchers analyze interventions and their outcomes.
 
 4. Workflow Automation
 
@@ -65,11 +65,11 @@ A platform for programmatically authoring, scheduling, and monitoring workflows 
 
 2. [Luigi](https://luigi.readthedocs.io/en/stable/index.html)
 
-A Python-based workflow management tool that uses DAGs to manage task dependencies and build complex pipelines.
+A Python based workflow management tool that uses DAGs to manage task dependencies and build complex pipelines.
 
 3. [Prefect](https://www.prefect.io/)
 
-A workflow orchestration tool designed for data workflows and ML pipelines, offering a user-friendly API for defining DAGs and monitoring executions.
+A workflow orchestration tool designed for data workflows and ML pipelines, offering a user friendly API for defining DAGs and monitoring executions.
 
 4. [Dagster](https://dagster.io)
 
@@ -77,8 +77,8 @@ A modern orchestration platform for building and managing data pipelines, with n
 
 5. [Nextflow](https://www.nextflow.io)
 
-A bioinformatics-oriented workflow management system that uses DAGs to process and analyze data, particularly in genomics.
+A bioinformatics oriented workflow management system that uses DAGs to process and analyze data, particularly in genomics.
 
 ## Summary
 
-DAGs are foundational structures in computational and data workflows, providing a clear and efficient way to model dependencies and manage complex processes. By organizing tasks or operations into nodes connected by directed edges, DAGs ensure tasks are executed in the correct sequence, avoid cyclic dependencies, and enable parallelism where possible. This makes them invaluable in fields like machine learning, workflow orchestration, data engineering, and causal inference. Tools and frameworks that leverage DAGs streamline the development, execution, and optimization of workflows, enhancing transparency, scalability, and error handling. The importance of DAGs lies in their ability to bring order to complexity, making them indispensable for modern computational systems and scalable data-driven applications.
+DAGs are foundational structures in computational and data workflows, providing a clear and efficient way to model dependencies and manage complex processes. By organizing tasks or operations into nodes connected by directed edges, DAGs ensure tasks are executed in the correct sequence, avoid cyclic dependencies, and enable parallelism where possible. This makes them invaluable in fields like machine learning, workflow orchestration, data engineering, and causal inference. Tools and frameworks that leverage DAGs streamline the development, execution, and optimization of workflows, enhancing transparency, scalability, and error handling. The importance of DAGs lies in their ability to bring order to complexity, making them indispensable for modern computational systems and scalable data driven applications.
