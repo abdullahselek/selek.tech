@@ -8,7 +8,7 @@ Recently I've done research on ML model serving frameworks and worked on dynamic
 
 ## Machine Learning (ML) Model Serving
 
-Machine Learning model serving refers to the process of deploying a trained ML model into a production environment, where it can be used to make predictions or inferences based on new, real-time data. This process is a critical phase in the life cycle of an ML model, as it transitions from a development phase, where it's trained and tested, to being an integral part of an application or service.
+Machine Learning model serving refers to the process of deploying a trained ML model into a production environment, where it can be used to make predictions or inferences based on new, real time data. This process is a critical phase in the life cycle of an ML model, as it transitions from a development phase, where it's trained and tested, to being an integral part of an application or service.
 
 There are many options as model serving frameworks such as [BentoML](https://github.com/bentoml), [Cortex](https://github.com/cortexlabs/cortex), [Tensorflow Serving](https://github.com/tensorflow/serving) but in this post we are going to focus on [TorchServe](https://pytorch.org/serve/index.html) which also support dynamic batching.
 
@@ -20,9 +20,9 @@ Let's check the key aspects of dynamic batch inference:
 
 1. Batch Processing, in machine learning, running inferences on a batch of data, rather than individual data points, can significantly improve processing speed. This is because batch processing allows for more efficient use of computational resources, such as GPUs or TPUs, by parallelizing operations across multiple data points.
 
-2. Dynamic Batching, unlike static batching where the batch size is fixed, dynamic batching adjusts the batch size in real-time based on the incoming request load. When requests arrive, instead of processing each one immediately, the system temporarily holds them to form a batch. The size of this batch can vary depending on the current load and the configured maximum wait time.
+2. Dynamic Batching, unlike static batching where the batch size is fixed, dynamic batching adjusts the batch size in real time based on the incoming request load. When requests arrive, instead of processing each one immediately, the system temporarily holds them to form a batch. The size of this batch can vary depending on the current load and the configured maximum wait time.
 
-3. Latency vs. Throughput Trade-off. Dynamic batch inference often involves a trade-off between latency and throughput. Larger batches can lead to higher throughput (more requests processed per unit of time) but might increase latency for individual requests, as they have to wait for other requests to form a full batch. The system must balance this to meet the desired service level agreements.
+3. Latency vs. Throughput Trade off. Dynamic batch inference often involves a trade off between latency and throughput. Larger batches can lead to higher throughput (more requests processed per unit of time) but might increase latency for individual requests, as they have to wait for other requests to form a full batch. The system must balance this to meet the desired service level agreements.
 
 4. Resource Utilization, by processing requests in batches dynamic batching makes more efficient use of computational resources. This is especially important in environments where resources are limited or costly.
 
