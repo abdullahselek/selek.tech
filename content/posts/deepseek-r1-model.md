@@ -12,9 +12,9 @@ comments: true
 
 Last week Chinese AI labs DeepSeek released their latest reasoning model R1, their models are on par with the most advanced models from OpenAI, Anthropic and Meta. This post is about the details of DeepSeek R1 model and the architecture behind it. Their paper is available at their repo on [Github](https://github.com/deepseek-ai/DeepSeek-R1).
 
-The DeepSeek R1 leverages a Mixture of Experts (MoE) architecture. It is a design where multiple specialized neural networks "experts" collaborate, with only a subset activated for each input. This balances computational efficiency with high performance. Each expert is a feed-forward neural network (FFN), a standard neural network layer that processes inputs through weighted connections and non-linear activations. R1 employs hundreds of these experts, each implicitly specializing in domains like mathematics, coding, or linguistics.
+The DeepSeek R1 leverages a Mixture of Experts (MoE) architecture. It is a design where multiple specialized neural networks "experts" collaborate, with only a subset activated for each input. This balances computational efficiency with high performance. Each expert is a feed forward neural network (FFN), a standard neural network layer that processes inputs through weighted connections and nonlinear activations. R1 employs hundreds of these experts, each implicitly specializing in domains like mathematics, coding, or linguistics.
 
-A lightweight router, Gating Network a small neural network dynamically selects the most relevant experts for each input token. For example, the token "def" might activate coding-focused experts. Sparse Activation engages only top-k experts per token, drastically reducing computation compared to dense models. In the dense models all parameters are used per token.
+A lightweight router, Gating Network a small neural network dynamically selects the most relevant experts for each input token. For example, the token "def" might activate coding focused experts. Sparse Activation engages only top k experts per token, drastically reducing computation compared to dense models. In the dense models all parameters are used per token.
 
 ## Architecture of DeepSeek-R1
 
@@ -30,7 +30,7 @@ Input Tokens → [Transformer Layers] → [MoE Layer] → [Transformer Layers] �
 
 The key efficiency of this architecture is activating less parameters per token. While the total model size is 671B parameters, only some small percentage of them are active per token, mimicking a smaller, faster model during inference.
 
-## Innovations behing DeepSeek-R1
+## Innovations behing DeepSeek R1
 
 1. Auxiliary losses
 
@@ -38,19 +38,19 @@ These are supplementary loss terms added to the primary training objective to en
 
 2. Load balancing
 
-This refers to algorithmic strategies that enforce equitable token-to-expert assignments during both training and inference. For instance, during training, the gating network’s logits (raw output scores before softmax) are adjusted to discourage repetitive expert selection. Techniques like expert buffering temporarily block overused experts from being selected until others catch up. Advanced implementations, such as router z-loss penalizing overly confident routing scores, smooth the gating distribution to avoid winner-takes-all scenarios. Load balancing also addresses hardware constraints: uneven expert utilization can cause GPU/TPU memory bottlenecks, as inactive experts still occupy VRAM. In frameworks like Google’s GShard or Meta’s Switch Transformer, load balancing is often achieved through top-k masking with noise—adding stochasticity to the gating process to ensure exploration of underused experts. The result is a self-correcting system where experts specialize in distinct patterns without monopolizing the workload, analogous to a well-managed team where tasks are dynamically delegated based on expertise and availability.
+This refers to algorithmic strategies that enforce equitable token to expert assignments during both training and inference. For instance, during training, the gating network’s logits (raw output scores before softmax) are adjusted to discourage repetitive expert selection. Techniques like expert buffering temporarily block overused experts from being selected until others catch up. Advanced implementations, such as router z loss penalizing overly confident routing scores, smooth the gating distribution to avoid winner takes all scenarios. Load balancing also addresses hardware constraints: uneven expert utilization can cause GPU/TPU memory bottlenecks, as inactive experts still occupy VRAM. In frameworks like Google’s GShard or Meta’s Switch Transformer, load balancing is often achieved through top k masking with noise—adding stochasticity to the gating process to ensure exploration of underused experts. The result is a self correcting system where experts specialize in distinct patterns without monopolizing the workload, analogous to a well managed team where tasks are dynamically delegated based on expertise and availability.
 
 ## Training Pipeline
 
-1. Pre-training Phase
+1. Pre training Phase
 
-R1 trained on a diverse corpus large-scale dataset including web pages, academic papers, code repositories and multilingual content. Uses autoregressive language modeling predicting the next token in a sequence and/or masked language modeling predicting masked tokens in a sentence.
+R1 trained on a diverse corpus large scale dataset including web pages, academic papers, code repositories and multilingual content. Uses autoregressive language modeling predicting the next token in a sequence and/or masked language modeling predicting masked tokens in a sentence.
 
-2. Fine-tuning Phase
+2. Finetuning Phase
 
-The model is refined on structured tasks to enhance versatility using Multi-Task Learning.
+The model is refined on structured tasks to enhance versatility using Multi Task Learning.
 
-- Reasoning: Benchmarks like GSM8K (grade-school math problems) and Big-Bench Hard (complex reasoning tasks).
+- Reasoning: Benchmarks like GSM8K (grade school math problems) and Big Bench Hard (complex reasoning tasks).
 - Coding: Datasets like HumanEval (Python code generation) and MBPP (short programming problems).
 - General Knowledge: Tests like MMLU (Massive Multitask Language Understanding, covering 57 subjects).
 - Curriculum Learning: Tasks are ordered from simple to complex (e.g. arithmetic → calculus → theorem proving), mirroring human educational progression.
@@ -65,7 +65,7 @@ Benchmark results are taken from their Github repo. It can process ~1,000 tokens
 
 ![benchmark](/images/post_pics/deepseek-r1-model/benchmark.jpg)
 
-### Trade-offs
+### Trade offs
 
 1. MoE models require more VRAM to manage expert parameters, even when inactive.
 2. Occasional inconsistencies between experts can cause erratic outputs, mitigated by balancing losses during training.
